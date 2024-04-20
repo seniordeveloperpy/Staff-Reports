@@ -1,0 +1,31 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+<br>
+<br>
+<br>
+<table class="table table-striped dataTable no-footer" id="table-1" role="grid" aria-describedby="table-1_info">
+    <thead>                                 
+      <tr role="row">
+        <th class="text-center sorting_asc" tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending">#</th>
+        <th class="sorting" tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-label="Task Name: activate to sort column ascending">Staffs</th>
+        <th class="sorting" tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-label="Task Name: activate to sort column ascending">Start time</th>
+        <th class="sorting" tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-label="Task Name: activate to sort column ascending">End time</th>
+        </thead>
+    <tbody>                                 
+      
+        {% for attend in attendance %}
+        <tr role="row" class="odd">
+            <td class="sorting_1">
+                {{forloop.counter}}
+            </td>
+            <td>{{attend.staff.firstname}} {{attend.staff.surname}}</td>
+            <td>{{attend.start_time}}</td>
+            <td>{{attend.end_time}}</td>
+            
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

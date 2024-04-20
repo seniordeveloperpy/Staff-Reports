@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Dashboard &mdash; Stisla</title>
+
+
+    <link rel="shortcut icon" href="{% static 'front/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'front/favicon.ico' %}" type="image/x-icon">
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static  'dashboard/modules/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static  'dashboard/modules/fontawesome/css/all.min.css' %}">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{% static  'dashboard/modules/jqvmap/dist/jqvmap.min.css' %}">
+  <link rel="stylesheet" href="{% static  'dashboard/modules/summernote/summernote-bs4.css' %}">
+  <link rel="stylesheet" href="{% static  'dashboard/modules/owlcarousel2/dist/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static  'dashboard/modules/owlcarousel2/dist/owl.theme.default.min.css' %}">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static  'dashboard/css/style.css' %}">
+  <link rel="stylesheet" href="{% static  'dashboard/css/components.css' %}">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            <input class="form-control" type="search" placeholder="search" aria-label="Search" data-width="250">
+            <button class="btn" type="submit"><i class="fas fa-search"></i></button>            
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="{% static  'dashboard/img/avatar/avatar-1.png' %}" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Hello, {{user}}</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              {% for user in users %}
+              <a href="{% url 'dashboard:edit_profile' user.id %}" class="dropdown-item has-icon">
+                <i class="far fa-user"></i> Profile
+              </a>
+              {% endfor %}
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'dashboard:log_out' %}" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="{% url 'dashboard:index'%}">IT company</a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li><a href="{% url 'dashboard:index' %}" ><i class="fas fa-home"></i><span>Main page</span></a></li>
+
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Staffs</span></a>
+              <ul class="dropdown-menu">
+                <li class=><a class="nav-link" href="{% url 'dashboard:create_staff' %}">Add staff</a></li>
+                <li ><a class="nav-link" href="{% url 'dashboard:list_staff' %}">List of staff</a></li>
+              </ul>
+            </li>  
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Reports</span></a>
+              <ul class="dropdown-menu">
+                <li ><a class="nav-link" href="{% url 'dashboard:list_attendance' %}">Report of staffs</a></li>
+              </ul>
+            </li>    
+        </aside>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        {% block content %}
+        {% endblock %}
+      </div>
+      <footer class="main-footer">
+          
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="{% static  'dashboard/modules/jquery.min.js' %}"></script>
+  <script src="{% static  'dashboard/modules/popper.js' %}"></script>
+  <script src="{% static  'dashboard/modules/tooltip.js' %}"></script>
+  <script src="{% static  'dashboard/modules/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static  'dashboard/modules/nicescroll/jquery.nicescroll.min.js' %}"></script>
+  <script src="{% static  'dashboard/modules/moment.min.js' %}"></script>
+  <script src="{% static  'dashboard/js/stisla.js' %}"></script>
+  
+  <!-- JS Libraies -->
+  <script src="{% static  'dashboard/modules/jquery.sparkline.min.js' %}"></script>
+  <script src="{% static  'dashboard/modules/chart.min.js' %}"></script>
+  <script src="{% static  'dashboard/modules/owlcarousel2/dist/owl.carousel.min.js' %}"></script>
+  <script src="{% static  'dashboard/modules/summernote/summernote-bs4.js' %}"></script>
+  <script src="{% static  'dashboard/modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="{% static  'dashboard/js/page/index.js' %}"></script>
+  
+  <!-- Template JS File -->
+  <script src="{% static  'dashboard/js/scripts.js' %}"></script>
+  <script src="{% static  'dashboard/js/custom.js' %}"></script>
+</body>
+</html>

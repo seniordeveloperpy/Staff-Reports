@@ -1,0 +1,21 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<section class="section">
+  <div class="section-header">
+    <h1>Dashboard</h1>
+  </div>
+<form method="POST">
+<div class="form-group">
+    <label>Staffs</label>
+    {% csrf_token %}
+    <input  type="text" class="form-control" name="name" value={{staff.firstname}}>
+    <input  type="text" class="form-control" name="name" value={{staff.surname}}>
+    <button type="submit" class="btn btn-success rounded-pill">Change</button>
+</div>
+</form>
+
+</section>
+{% endblock %}

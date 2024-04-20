@@ -1,0 +1,75 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+<br>
+<br>
+<br>
+<table class="table table-striped dataTable no-footer" id="table-1" role="grid" aria-describedby="table-1_info">
+    <thead>                                 
+      <tr role="row">
+        <th class="text-center sorting_asc" tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending">#</th>
+        <th class="sorting" tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-label="Task Name: activate to sort column ascending">Xodimlar</th>
+        <th class="sorting" tabindex="0" aria-controls="table-1" rowspan="1" colspan="1" aria-label="Task Name: activate to sort column ascending">Harakatlar</th>
+        </thead>
+    <tbody>                                 
+      
+        {% for s in staff %}
+        <tr role="row" class="odd">
+            <td class="sorting_1">
+                {{forloop.counter}}
+            </td>
+            <td>{{s.firstname}} {{s.surname}}</td>
+            <td> 
+                <a href="{% url 'dashboard:update_staff' s.id %}" data-toggle="modal" data-target=".bd-example-modal-lg{{forloop.counter}}" style='margin-right:10px;' ><i class="fas fa-edit"></i>
+                </a>
+                <button type="button" class="btn btn-icon btn-hover btn-sm btn-rounded" data-toggle="modal" data-target=".bd-example-modal-sm{{forloop.counter}}">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                <div class="modal fade bd-example-modal-sm{{forloop.counter}}">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title h4">{{s.firstname}}</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="anticon anticon-close"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <b>Delete {{s.firstname}}</b>
+                            </div>
+                            <div class="btn-group">
+                                <form method="post" action="{% url 'dashboard:delete_staff' s.id %}">
+                                    {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-tone">Yes</button>
+                                <button class="btn btn-danger btn-tone" type="button" data-dismiss="modal">No</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                <div class="modal fade bd-example-modal-lg{{forloop.counter}}">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title h4">{{s.firstname}}</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <i class="anticon anticon-close"></i>
+                                </button>
+                            </div>
+                            <form action="{% url 'dashboard:update_staff' s.id %}" method="post">
+                                {% csrf_token %}
+                            <div class="modal-body">
+                                <input type="text" class="form-control" value="{{s.firstname}}" name="firstname" style='margin-bottom:15px;'>
+                                <input type="text" class="form-control" value="{{s.surname}}" name="surname">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-tone" >Change</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
